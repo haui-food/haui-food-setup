@@ -12,18 +12,6 @@ services:
     networks:
       - ${HAUI_FOOD_NET_NAME}
 
-  postgres:
-    image: postgres:latest
-    container_name: postgres_db
-    ports:
-      - "${DATABASE_POSTGRES_PORT}:${DATABASE_POSTGRES_CONTAINER_PORT}"
-    environment:
-      POSTGRES_USER: "${DATABASE_POSTGRES_USERNAME}"
-      POSTGRES_PASSWORD: "${DATABASE_POSTGRES_PASSWORD}"
-      POSTGRES_DB: "${DATABASE_POSTGRES_NAME}"
-    networks:
-      - ${HAUI_FOOD_NET_NAME}
-
   rabbitmq:
     image: rabbitmq:latest
     container_name: rabbitmq
