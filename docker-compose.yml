@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "${DATABASE_MONGO_PORT}:${DATABASE_MONGO_CONTAINER_PORT}"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${DATABASE_MONGO_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${DATABASE_MONGO_PASSWORD}"
+    networks:
+      - ${HAUI_FOOD_NET_NAME}
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    ports:
+      - "${DATABASE_POSTGRES_PORT}:${DATABASE_POSTGRES_CONTAINER_PORT}"
+    environment:
+      POSTGRES_USER: "${DATABASE_POSTGRES_USERNAME}"
+      POSTGRES_PASSWORD: "${DATABASE_POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${DATABASE_POSTGRES_NAME}"
+    networks:
+      - ${HAUI_FOOD_NET_NAME}
+
+  rabbitmq:
+    image: rabbitmq:latest
+    container_name: rabbitmq
+    ports:
+      - "${RABBITMQ_PORT}:${RABBITMQ_CONTAINER_PORT}"
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+    networks:
+      - ${HAUI_FOOD_NET_NAME}
+
+networks:
+  haui-food-:
+    external: true
